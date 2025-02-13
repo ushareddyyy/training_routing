@@ -1,0 +1,12 @@
+Routing in react:-
+******************
+- routing is a third party library used to provide navigation between two components//pages.
+- routing is not belongs to react it is a third party library called as 
+        "react-router-dom".
+
+- npm install react-router-dom@latest
+
+- "react-router-dom": "^7.1.5",
+7 - major version
+1 - minor version
+5 - patch version
