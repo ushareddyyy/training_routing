@@ -1,0 +1,25 @@
+#homeBlock{
+    width:100% ;
+    margin: 70px;
+}
+#homeBlock > article{
+
+}
+#homeBlock > article > h1{
+   
+    
+}
+table{
+
+}
+table ,th,td{
+    padding: 10px;
+}
+.createBtn{
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color:geen ;
+    color: white;
+
+}
+

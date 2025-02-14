@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import Navbar from './components/Navbar';
 import {BrowserRouter  , Routes , Route} from "react-router-dom";
 import Dashboard from './pages/Dashboard';
@@ -31,6 +31,26 @@ const App = () => {
             <Route path='*' element={<PageNotFound/>}/>
         </Routes>
     </BrowserRouter>
+  )
+}
+
+export default App */
+import React from 'react'
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import Create from './crudcomponents/Create'
+import Home from './crudcomponents/Home'
+import Create from './crudcomponents/Create'
+import Edit from './crudcomponents/Edit'
+const App = () => {
+  return (
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/reate' element={<Create/>}/>
+      <Route path='/Edit' element={<Edit/>}/>
+      
+      </Routes>
+      </BrowserRouter>
   )
 }
 
