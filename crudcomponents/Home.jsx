@@ -1,68 +1,79 @@
-import React, { useEffect, useState } from 'react';
-import "./home.css";
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import "./home.css"
+import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Home = () => {
-    const [users, setUsers] = useState([]);
+    const[users , setUsers] =useState([]);
+    // console.log(users);
 
-    useEffect(() => {
+    useEffect(()=>{
         axios.get("http://localhost:8000/users")
-            .then(res => setUsers(res.data))
-            .catch(err => console.error(err));
-    }, []); // Added dependency array to prevent infinite requests
-    //!to delete user
-    const deleteUser=id=>{
-        const confirm=window.confirm("Are you want to delte user")
+        .then(res=>{
+            // console.log(res.data);
+            setUsers(res.data);
+        }).catch(err=>console.log(err))
+
+    },[]);
+
+    // ! to delete individual  user
+    const deleteUser = id =>{
+        const confirm = window.confirm("Are you sure you want to delete user");
         if(confirm){
             axios.delete("http://localhost:8000/users/"+id)
-            /* .then(res=>{
-              toast.success("user deleted successfully");
-            }).catch */
+            .then(res=>{
+                toast.success("user deleted successfully");
+
+               setTimeout(()=>{
+                window.location.reload();
+               }, 1500);
+            })
+            .catch(err=>toast.error("user not deleted"))
         }
     }
+  return (
+    <section id="homeBlock">
+        <article>
+            <h1>List Of Users</h1>
 
-    return (
-        <section id="homeBlock">
-            <article> {/* Fixed typo: 'artical' to 'article' */}
-                <h1>List of Users</h1>
-                <div className="createBtn">
-                    <Link to='/create'>Add User (+)</Link>
-                </div>
-                {
-                    users.length > 0 ? (
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Actions</th>
+            <div className="createBtn">
+                <Link to='/create'>Add User (+)</Link>
+            </div>
+          {
+            users && users.length > 0 ? (  <table>
+                <thead>
+                    <tr>
+                        <th>Sl.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        users.map((user , i)=>{
+                            return(
+                                <tr key={i}>
+                                    <td>{user.id}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.phone}</td>
+                                    <td>
+                                        <Link to={`/edit/${user.id}`}>Edit</Link>
+                                        <button onClick={()=>deleteUser(user.id)}>Delete</button>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    users.map((user, i) => (
-                                        <tr key={user.id || i}> {/* Using user.id if available */}
-                                            <td>{i + 1}</td>
-                                            <td>{user.name}</td>
-                                            <td>{user.email}</td>
-                                            <td>{user.phone}</td>
-                                            <td>
-                                                <Link to={`/edit/${user.id}`}>Edit</Link>
-                                                <button onClick={()=>deleteUser(user.id)}>Delete</button>
-                                            </td>
-                                        </tr>
-                                    ))
-                                }
-                            </tbody>
-                        </table>
-                    ) : <p>No users available.</p>
-                }
-            </article>
-        </section>
-    );
-};
+                            )
+                        })
+                    }
+                </tbody>
+            </table>) :<h1>No data available</h1>
+          }
+        </article>
+    </section>
+  )
+}
 
-export default Home;
+export default Home
