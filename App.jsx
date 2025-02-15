@@ -35,23 +35,35 @@ const App = () => {
 }
 
 export default App */
-import React from 'react'
+/* import React from 'react'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import Create from './crudcomponents/Create'
 import Home from './crudcomponents/Home'
-import Create from './crudcomponents/Create'
 import Edit from './crudcomponents/Edit'
+import { ToastContainer } from 'react-toastify'
 const App = () => {
   return (
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Home/>}/>
-      <Route path='/reate' element={<Create/>}/>
-      <Route path='/Edit' element={<Edit/>}/>
+      <Route path='/create' element={<Create/>}/>
+      <Route path='/edit/:userId' element={<Edit/>}/>
       
       </Routes>
       </BrowserRouter>
   )
 }
 
-export default App
+export default App */
+import React from "react";
+import Card from "./card/Card";
+
+const App = () => {
+  return (
+    <div className="app">
+      <Card />
+    </div>
+  );
+};
+
+export default App;
